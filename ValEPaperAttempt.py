@@ -8,6 +8,7 @@ import adafruit_il0373
 import adafruit_pcf8523
 from adafruit_bitmap_font import bitmap_font
 from adafruit_display_text import label
+import adafruit_register
 
 
 # Creates object I2C that connects the I2C module to pins SCL and SDA
@@ -16,19 +17,19 @@ myI2C = busio.I2C(board.SCL, board.SDA)
 # Creates an object that can access the RTC and communicate that information along using I2C.
 rtc = adafruit_pcf8523.PCF8523(myI2C)
 
-if False:   # change to True if you want to write the time!
+
+if True:   # change to True if you want to write the time!
     #                     year, mon, date, hour, min, sec, wday, yday, isdst
     #   t is a time object
     t = time.struct_time((2022,  03,   09,   15,  56,  15,    0,   -1,    -1))
 
-    #print("Setting time to:", t)     # uncomment for debugging
+    # print("Setting time to:", t)     # uncomment for debugging
     rtc.datetime = t
     #print()
 
-    storeText = "%d:%02d:%02d \r\n" % (t.tm_hour, t.tm_min, t.tm_sec)
 
 
-
+storeText = "%d:%02d:%02d \r\n" % (t.tm_hour, t.tm_min, t.tm_sec)
 displayio.release_displays()
 
 BLACK = 0x000000
